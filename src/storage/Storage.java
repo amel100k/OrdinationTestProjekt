@@ -3,6 +3,8 @@ package storage;
 import java.util.ArrayList;
 import java.util.List;
 
+import ordination.DagligSkaev;
+import ordination.Dosis;
 import ordination.Laegemiddel;
 import ordination.Patient;
 
