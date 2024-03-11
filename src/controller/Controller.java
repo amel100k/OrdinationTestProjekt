@@ -40,7 +40,12 @@ public class Controller {
 	public PN opretPNOrdination(LocalDate startDen, LocalDate slutDen,
 			Patient patient, Laegemiddel laegemiddel, double antal) {
 		// TODO
-		return null;
+		if (startDen.isAfter(slutDen)) {
+			throw new IllegalArgumentException("Startdato er efter slutdato");
+		}
+		PN pn = new PN(startDen, slutDen, laegemiddel, antal);
+		patient.addOrdination(pn);
+		return pn;
 	}
 
 
