@@ -19,16 +19,21 @@ public class DagligFast extends Ordination{
 
     @Override
     public double samletDosis() {
-        return 0;
+        //Returnerer den totale dosis der er givet i den periode ordinationen er gyldig
+        double sum = 0;
+        for (Dosis d : doser) {
+            sum += d.getAntal();
+        }
+        return sum;
     }
 
     @Override
     public double doegnDosis() {
-        return 0;
+        return samletDosis() / antalDage();
     }
 
     @Override
     public String getType() {
-        return null;
+        return "Daglig Fast";
     }
 }
