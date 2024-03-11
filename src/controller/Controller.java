@@ -43,7 +43,7 @@ public class Controller {
 		if (startDen.isAfter(slutDen)) {
 			throw new IllegalArgumentException("Startdato er efter slutdato");
 		}
-		PN pn = new PN(startDen, slutDen, laegemiddel, antal);
+		PN pn = new PN(startDen, slutDen, patient, laegemiddel, antal);
 		patient.addOrdination(pn);
 		return pn;
 	}
