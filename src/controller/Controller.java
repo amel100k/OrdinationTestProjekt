@@ -134,16 +134,18 @@ public class Controller {
 	 * Pre: laegemiddel er ikke null
 	 */
 	public int antalOrdinationerPrVægtPrLægemiddel(double vægtStart,
-			double vægtSlut, Laegemiddel laegemiddel) {
-		int antalOrdinationerPrVægtPrLægemiddel = 0;
-		for (int i = 0; i < storage.getAllPatienter().size(); i++) {
-			if (storage.getAllPatienter().get(i).getVaegt() >= vægtSlut || storage.getAllPatienter().get(i).getVaegt() <= vægtStart)
-				for (int j = 0; j < storage.getAllPatienter().get(i).getOrdinationer().size(); j++) {
-					if (storage.getAllPatienter().get(i).getOrdinationer().get(i).getLaegemiddel().equals(laegemiddel))
-						antalOrdinationerPrVægtPrLægemiddel++;
+												   double vægtSlut, Laegemiddel laegemiddel) {
+		int count = 0;
+		for (Patient patient : storage.getAllPatienter()) {
+			if (patient.getVaegt() >= vægtStart && patient.getVaegt() <= vægtSlut) {
+				for (int i = 0; i < patient.getOrdinationer().size(); i++) {
+					if (patient.getOrdinationer().get(i).getLaegemiddel().equals(laegemiddel)) {
+						count++;
+					}
 				}
+			}
 		}
-		return antalOrdinationerPrVægtPrLægemiddel;
+		return count;
 	}
 
 	public List<Patient> getAllPatienter() {
