@@ -42,9 +42,7 @@ public class Controller {
 		// TODO
 		return null;
 	}
-	public int helloWorld(){
-		return 1;
-	}
+
 
 	/**
 	 * Opretter og returnerer en DagligFast ordination. Hvis startDato er efter
