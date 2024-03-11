@@ -10,7 +10,7 @@ import ordination.Laegemiddel;
 import ordination.PN;
 import ordination.Patient;
 import storage.Storage;
-
+//test
 public class Controller {
 	private Storage storage;
 	private static Controller controller;
@@ -41,6 +41,9 @@ public class Controller {
 			Patient patient, Laegemiddel laegemiddel, double antal) {
 		// TODO
 		return null;
+	}
+	public int helloWorld(){
+		return 1;
 	}
 
 	/**
