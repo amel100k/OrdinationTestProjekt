@@ -4,18 +4,21 @@ import java.time.LocalDate;
 
 public class PN {
 
-    private double antalEnheder;
+    private double antalEnheder ;
 
     /**
      * Registrerer at der er givet en dosis paa dagen givesDen
      * Returnerer true hvis givesDen er inden for ordinationens gyldighedsperiode og datoen huskes
      * Retrurner false ellers og datoen givesDen ignoreres
+     *
      * @param givesDen
      * @return
      */
     public boolean givDosis(LocalDate givesDen) {
-        // TODO
-        return false;   
+        if (givesDen.isAfter(startDen) && givesDen.isBefore(slutDen))
+            //gem dato
+            return true;
+        else return false;
     }
 
     public double doegnDosis() {
@@ -31,11 +34,12 @@ public class PN {
 
     /**
      * Returnerer antal gange ordinationen er anvendt
+     *
      * @return
      */
     public int getAntalGangeGivet() {
         // TODO
-        return-1;
+        return -1;
     }
 
     public double getAntalEnheder() {
