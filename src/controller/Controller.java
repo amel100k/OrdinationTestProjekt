@@ -139,7 +139,7 @@ public class Controller {
 		for (int i = 0; i < storage.getAllPatienter().size(); i++) {
 			if (storage.getAllPatienter().get(i).getVaegt() >= vægtSlut || storage.getAllPatienter().get(i).getVaegt() <= vægtStart)
 				for (int j = 0; j < storage.getAllPatienter().get(i).getOrdinationer().size(); j++) {
-					if (storage.getAllPatienter().get(i).getOrdinationer().get(i).getLaegemiddel() == laegemiddel)
+					if (storage.getAllPatienter().get(i).getOrdinationer().get(i).getLaegemiddel().equals(laegemiddel))
 						antalOrdinationerPrVægtPrLægemiddel++;
 				}
 		}
