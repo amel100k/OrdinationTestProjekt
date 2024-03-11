@@ -39,11 +39,10 @@ public class Controller {
 	 */
 	public PN opretPNOrdination(LocalDate startDen, LocalDate slutDen,
 			Patient patient, Laegemiddel laegemiddel, double antal) {
-		// TODO
 		if (startDen.isAfter(slutDen)) {
 			throw new IllegalArgumentException("Startdato er efter slutdato");
 		}
-		PN pn = new PN(startDen, slutDen, patient, laegemiddel, antal);
+		PN pn = new PN(startDen, slutDen, laegemiddel, antal);
 		patient.addOrdination(pn);
 		return pn;
 	}
@@ -59,8 +58,13 @@ public class Controller {
 			LocalDate slutDen, Patient patient, Laegemiddel laegemiddel,
 			double morgenAntal, double middagAntal, double aftenAntal,
 			double natAntal) {
-		// TODO
-		return null;
+        DagligFast dagligFast = new DagligFast(startDen, slutDen, laegemiddel);
+        patient.addOrdination(dagligFast);
+        dagligFast.addMorgenDosis(morgenAntal);
+        dagligFast.addMiddagnDosis(middagAntal);
+        dagligFast.addAftenDosis(aftenAntal);
+        dagligFast.addNatDosis(natAntal);
+        return dagligFast;
 	}
 
 	/**
@@ -75,6 +79,7 @@ public class Controller {
 			LocalDate slutDen, Patient patient, Laegemiddel laegemiddel,
 			LocalTime[] klokkeSlet, double[] antalEnheder) {
 		// TODO
+        DagligSkaev dagligSkaev
 		return null;
 	}
 
