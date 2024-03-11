@@ -2,9 +2,13 @@ package ordination;
 
 import java.time.LocalDate;
 
-public class PN {
+public class PN extends Ordination{
 
     private double antalEnheder ;
+
+    public PN(LocalDate startDen, LocalDate slutDen, Laegemiddel laegemiddel) {
+        super(startDen, slutDen, laegemiddel);
+    }
 
     /**
      * Registrerer at der er givet en dosis paa dagen givesDen
@@ -15,7 +19,7 @@ public class PN {
      * @return
      */
     public boolean givDosis(LocalDate givesDen) {
-        if (givesDen.isAfter(startDen) && givesDen.isBefore(slutDen))
+        if (givesDen.isAfter(super.getStartDen()) && givesDen.isBefore(super.getSlutDen()))
             //gem dato
             return true;
         else return false;
@@ -24,6 +28,11 @@ public class PN {
     public double doegnDosis() {
         // TODO
         return 0.0;
+    }
+
+    @Override
+    public String getType() {
+        return null;
     }
 
 
