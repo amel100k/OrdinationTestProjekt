@@ -62,11 +62,11 @@ public class Controller {
             throw new IllegalArgumentException("Startdato er efter slutdato");
         }
         DagligFast dagligFast = new DagligFast(startDen, slutDen, laegemiddel);
-        patient.addOrdination(dagligFast);
         dagligFast.addMorgenDosis(morgenAntal);
         dagligFast.addMiddagnDosis(middagAntal);
         dagligFast.addAftenDosis(aftenAntal);
         dagligFast.addNatDosis(natAntal);
+		patient.addOrdination(dagligFast);
         return dagligFast;
 	}
 
@@ -81,9 +81,6 @@ public class Controller {
 	public DagligSkaev opretDagligSkaevOrdination(LocalDate startDen,
 												  LocalDate slutDen, Patient patient, Laegemiddel laegemiddel,
 												  LocalTime[] klokkeSlet, double[] antalEnheder) {
-		if (startDen.isAfter(slutDen)) {
-			throw new IllegalArgumentException("Startdato er efter slutdato");
-		}
 		if (startDen.isAfter(slutDen)) {
 			throw new IllegalArgumentException("Startdato er efter slutdato");
 		}
@@ -102,10 +99,10 @@ public class Controller {
 	 * Pre: ordination og dato er ikke null
 	 */
 	public void ordinationPNAnvendt(PN ordination, LocalDate dato) {
-		ordination.givDosis(dato);
 		if (ordination.getStartDen().isAfter(dato) || ordination.getSlutDen().isBefore(dato)) {
 			throw new IllegalArgumentException("Datoen er ikke indenfor ordinationens gyldighedsperiode");
 		}
+		ordination.givDosis(dato);
 	}
 
 	/**
@@ -116,7 +113,7 @@ public class Controller {
 	 */
 	public double anbefaletDosisPrDoegn(Patient patient, Laegemiddel laegemiddel) {
 		double anbefaletDosis = 0;
-		if (patient.getVaegt() > 25){
+		if (patient.getVaegt() < 25){
 			anbefaletDosis = laegemiddel.getEnhedPrKgPrDoegnLet() * patient.getVaegt();
 		}
 		else if (patient.getVaegt() >= 25 && patient.getVaegt() <= 120) {
