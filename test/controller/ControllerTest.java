@@ -19,11 +19,13 @@ class ControllerTest {
         Exception exception = assertThrows(RuntimeException.class, () -> {
             Controller.getController().opretDagligFastOrdination(LocalDate.of(2024, 8, 25), LocalDate.of(2024, 8, 21), p1, l1, 1, 2, 1, 1);
         });
-        int i = 3;
-        //fastOrdination = Controller.getController().opretDagligFastOrdination(LocalDate.of(2024, 8, 14), LocalDate.of(2024, 8, 21), p1, l1, 1, 2, 1, 1);
+        int arraySize = p1.getOrdinationer().size();
+        Controller.getController().opretDagligFastOrdination(LocalDate.of(2024, 8, 14), LocalDate.of(2024, 8, 21), p1, l1, 1, 2, 1, 1);
         //assert
-        assertEquals(exception.getMessage(), "Startdato er efter slutdato");
-        assertEquals(p1.getOrdinationer().contains());
+        assertEquals("Startdato er efter slutdato", exception.getMessage());
+        assertEquals(arraySize+1, p1.getOrdinationer().size());
+        assertEquals(l1, p1.getOrdinationer().getLast().getLaegemiddel());
+        //assertEquals(p1.getOrdinationer().getLast().g);
     }
 
     @org.junit.jupiter.api.Test

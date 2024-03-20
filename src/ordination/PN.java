@@ -1,10 +1,11 @@
 package ordination;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PN extends Ordination{
+public class PN extends Ordination {
 
     private double antalEnheder;
     private List datoer = new ArrayList();
@@ -23,14 +24,14 @@ public class PN extends Ordination{
      * @return
      */
     public boolean givDosis(LocalDate givesDen) {
-        if (givesDen.isAfter(super.getStartDen()) && givesDen.isBefore(super.getSlutDen())){
+        if (!givesDen.isBefore(super.getStartDen()) && !givesDen.isAfter(super.getSlutDen())) {
             datoer.add(givesDen);
-            return true;}
-        else return false;
+            return true;
+        } else return false;
     }
 
     public double doegnDosis() {
-        return samletDosis()/(super.antalDage());
+        return samletDosis() / (ChronoUnit.DAYS.between(getFirstDay(), getLastDay()) + 1);
     }
 
     @Override
@@ -40,7 +41,7 @@ public class PN extends Ordination{
 
 
     public double samletDosis() {
-        return datoer.size()*antalEnheder;
+        return datoer.size() * antalEnheder;
     }
 
     /**
@@ -56,4 +57,25 @@ public class PN extends Ordination{
         return antalEnheder;
     }
 
+    public List getDatoer() {
+        return datoer;
+    }
+
+    public LocalDate getFirstDay() {
+        LocalDate firstDay = (LocalDate) datoer.getFirst();
+        for (int i = 0; i < datoer.size() - 1; i++) {
+            if (firstDay.isBefore((LocalDate) datoer.get(i)))
+                firstDay = (LocalDate) datoer.get(i);
+        }
+        return firstDay;
+    }
+
+    public LocalDate getLastDay() {
+        LocalDate lastDay = (LocalDate) datoer.getLast();
+        for (int i = 0; i < datoer.size() - 1; i++) {
+            if (lastDay.isBefore((LocalDate) datoer.get(i)))
+                lastDay = (LocalDate) datoer.get(i);
+        }
+        return lastDay;
+    }
 }
