@@ -4,6 +4,7 @@ import ordination.Ordination;
 import ordination.PN;
 import ordination.Patient;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import storage.Storage;
 
 import java.time.LocalDate;
@@ -86,5 +87,20 @@ class ControllerTest {
         Controller.getController().opretPNOrdination(LocalDate.of(2021,1,1),LocalDate.of(2021,1,12),Controller.getController().getAllPatienter().get(1),Controller.getController().getAllLaegemidler().getFirst(),123);
         assertEquals(1,Controller.getController().antalOrdinationerPrVægtPrLægemiddel(50,100,Controller.getController().getAllLaegemidler().getFirst()));
         assertEquals(0,Controller.getController().antalOrdinationerPrVægtPrLægemiddel(120,100, Controller.getController().getAllLaegemidler().getFirst()));
+    }
+
+    @Test
+    void opretPNOrdination() {
+        Patient p1 = new Patient("121256-0512","Jane Jensen",24.0);
+        Laegemiddel l1 = new Laegemiddel("Paracetamol", 1, 1.5, 2, "Ml");
+        assertThrows(IllegalArgumentException.class,() -> Controller.getController().opretPNOrdination(LocalDate.of(2021,1,1),LocalDate.of(2020,12,12),p1,l1,5));
+
+        int arraySize = p1.getOrdinationer().size();
+        Controller.getController().opretPNOrdination(LocalDate.of(2021,1,1),LocalDate.of(2021,1,12),p1,l1,5);
+
+        //assert
+        assertEquals(p1.getOrdinationer().size(),arraySize + 1);
+        assertEquals(p1.getOrdinationer().getLast().getLaegemiddel(),l1);
+
     }
 }
