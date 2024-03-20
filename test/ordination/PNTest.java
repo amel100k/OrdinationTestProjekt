@@ -36,7 +36,7 @@ class PNTest {
     }
 
     @Test
-    void doegnDosis() {
+    void doegnDosisTC1() {
         Laegemiddel l1 = new Laegemiddel("Paracetamol", 1,
                 1.5, 2, "MI");
         PN pn = new PN(LocalDate.of(2024,2,1), LocalDate.of(2024,2,10), l1, 5);
@@ -45,5 +45,15 @@ class PNTest {
         double expected = 1.43;
         double actual = pn.doegnDosis();
         assertEquals(expected, actual, 0.008);
+    }
+    @Test
+    void doegnDosisTC2() {
+        Laegemiddel l1 = new Laegemiddel("Paracetamol", 1,
+                1.5, 2, "MI");
+        PN pn = new PN(LocalDate.of(2024,2,1), LocalDate.of(2024,2,10), l1, 5);
+        pn.givDosis(LocalDate.of(2024,2,2));
+        double expected = 5;
+        double actual = pn.doegnDosis();
+        assertEquals(expected, actual);
     }
 }
