@@ -28,8 +28,17 @@ class ControllerTest {
         Laegemiddel l1 = new Laegemiddel("Paracetamol", 1, 1.5, 2, "Ml");
         Patient p1 = new Patient("121256-0512", "Jane Jensen", 24.0);
 
-        Controller.getController().opretDagligSkaevOrdination(LocalDate.of(2024,8,25),LocalDate.of(2024,8,21),p1,l1, new LocalTime[]{LocalTime.of(13, 5)},new double[]{3});
+        Exception exception = assertThrows(RuntimeException.class, () -> {Controller.getController().opretDagligSkaevOrdination(LocalDate.of(2024,8,25),LocalDate.of(2024,8,21),p1,l1, new LocalTime[]{LocalTime.of(13, 5)},new double[]{3});
+        });
 
+        int arraySize = p1.getOrdinationer().size();
+        Controller.getController().opretDagligSkaevOrdination(LocalDate.of(2024,8,14),LocalDate.of(2024,8,21),p1,l1,new LocalTime[]{LocalTime.of(13,5),LocalTime.of(16,15)},new double[]{2,2});
+
+
+        //assert
+        assertEquals(exception.getMessage(), "Startdato er efter slutdato");
+        assertEquals(p1.getOrdinationer().size(),arraySize + 1);
+        assertEquals(p1.getOrdinationer().getLast().getLaegemiddel(),l1);
     }
 
     @org.junit.jupiter.api.Test
