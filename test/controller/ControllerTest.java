@@ -121,6 +121,5 @@ class ControllerTest {
         //assert
         assertEquals(p1.getOrdinationer().size(),arraySize + 1);
         assertEquals(p1.getOrdinationer().getLast().getLaegemiddel(),l1);
-
     }
 }

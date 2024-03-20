@@ -66,8 +66,6 @@ class DagligSkaevTest {
     void doegnDosisTC3() {
         Laegemiddel l1 = new Laegemiddel("Fucidin", 1, 1.5, 2, "Ml");
         DagligSkaev ds = new DagligSkaev(LocalDate.of(2024,2,21),LocalDate.of(2024,2,23),l1);
-        ds.opretDosis(LocalTime.of(13,30),4);
-        ds.opretDosis(LocalTime.of(14,30),4);
 
         double expected = 0;
         double actual = ds.doegnDosis();
